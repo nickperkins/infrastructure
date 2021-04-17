@@ -3,7 +3,7 @@ resource "aws_route_table" "external" {
 
   tags = merge(var.common_tags,
     {
-      Name = "main"
+      Name = "${var.name}-${var.environment}"
     }
   )
 }
@@ -13,7 +13,7 @@ resource "aws_route_table" "internal" {
 
   tags = merge(var.common_tags,
     {
-      Name = "main"
+      Name = "${var.name}-${var.environment}"
     }
   )
 }

@@ -3,7 +3,7 @@ resource "aws_vpc" "main" {
 
   tags = merge(var.common_tags,
     {
-      Name = "Main-${local.environment}"
+      Name = "${var.name}-${var.environment}"
     }
   )
 }

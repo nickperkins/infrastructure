@@ -3,7 +3,7 @@ resource "aws_internet_gateway" "main" {
 
   tags = merge(var.common_tags,
     {
-      Name = "main"
+      Name = "${var.name}-${var.environment}"
     }
   )
 }
@@ -14,7 +14,7 @@ resource "aws_eip" "nat_gateway" {
 
   tags = merge(var.common_tags,
     {
-      Name = "main-${local.az_charaters[count.index]}"
+      Name = "${var.name}-${var.environment}-${local.az_charaters[count.index]}"
     }
   )
 
@@ -31,7 +31,7 @@ resource "aws_nat_gateway" "main" {
 
   tags = merge(var.common_tags,
     {
-      Name = "main-${local.az_charaters[count.index]}"
+      Name = "${var.name}-${var.environment}-${local.az_charaters[count.index]}"
     }
   )
 

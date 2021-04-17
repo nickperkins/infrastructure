@@ -1,5 +1,6 @@
 locals {
+  environment = terraform.workspace
   common_tags = {
-    Environment = "${terraform.workspace}"
+    Environment = "${local.environment}"
   }
 }

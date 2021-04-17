@@ -4,5 +4,4 @@ locals {
     for name in data.aws_availability_zones.available.names :
     substr(name, -1, 1)
   ]
-  environment = title(terraform.workspace)
 }
