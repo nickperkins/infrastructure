@@ -1,7 +1,7 @@
 resource "aws_route_table" "external" {
   vpc_id = aws_vpc.main.id
 
-  tags = merge(var.common_tags,
+  tags = merge(var.default_tags,
     {
       Name = "${var.name}-${var.environment}"
     }
@@ -11,7 +11,7 @@ resource "aws_route_table" "external" {
 resource "aws_route_table" "internal" {
   vpc_id = aws_vpc.main.id
 
-  tags = merge(var.common_tags,
+  tags = merge(var.default_tags,
     {
       Name = "${var.name}-${var.environment}"
     }

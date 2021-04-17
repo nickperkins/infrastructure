@@ -1,10 +1,10 @@
 module "networking" {
-  source = "./vpc"
+  source = "./networking"
 
   name        = var.name
   environment = var.environment
 
   cidr_block = var.vpc_base_cidr
 
-  common_tags = var.common_tags
+  default_tags = var.default_tags
 }

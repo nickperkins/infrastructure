@@ -7,6 +7,6 @@ module "development_network" {
   environment   = terraform.workspace
   vpc_base_cidr = "10.1.0.0/16"
 
-  common_tags = local.common_tags
+  default_tags = local.default_tags
 
 }

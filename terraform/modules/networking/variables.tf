@@ -20,7 +20,12 @@ variable "vpc_base_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "common_tags" {
+variable "subnet_newbits" {
+  type    = number
+  default = 4
+}
+
+variable "default_tags" {
   type        = map(string)
   description = "Common Tags for the module"
 }

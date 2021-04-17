@@ -1,7 +1,7 @@
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
 
-  tags = merge(var.common_tags,
+  tags = merge(var.default_tags,
     {
       Name = "${var.name}-${var.environment}"
     }
@@ -12,7 +12,7 @@ resource "aws_eip" "nat_gateway" {
   count = length(aws_subnet.public.*)
   vpc   = true
 
-  tags = merge(var.common_tags,
+  tags = merge(var.default_tags,
     {
       Name = "${var.name}-${var.environment}-${local.az_charaters[count.index]}"
     }
@@ -29,7 +29,7 @@ resource "aws_nat_gateway" "main" {
   allocation_id = element(aws_eip.nat_gateway.*.id, count.index)
   subnet_id     = element(aws_subnet.public.*.id, count.index)
 
-  tags = merge(var.common_tags,
+  tags = merge(var.default_tags,
     {
       Name = "${var.name}-${var.environment}-${local.az_charaters[count.index]}"
     }
