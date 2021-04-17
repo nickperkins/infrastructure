@@ -8,7 +8,7 @@ resource "aws_internet_gateway" "main" {
   )
 }
 
-resource "aws_eip" "nat_gateway" {
+resource "aws_eip" "nat" {
   count = length(aws_subnet.public.*)
   vpc   = true
 
@@ -26,8 +26,8 @@ resource "aws_eip" "nat_gateway" {
 resource "aws_nat_gateway" "main" {
   count = length(aws_subnet.public.*)
 
-  allocation_id = element(aws_eip.nat_gateway.*.id, count.index)
-  subnet_id     = element(aws_subnet.public.*.id, count.index)
+  allocation_id = aws_eip.nat[count.index].id
+  subnet_id     = aws_subnet.public[count.index].id
 
   tags = merge(var.default_tags,
     {
@@ -36,6 +36,6 @@ resource "aws_nat_gateway" "main" {
   )
 
   depends_on = [
-    aws_route_table_association.external_public
+    aws_internet_gateway.main
   ]
 }
